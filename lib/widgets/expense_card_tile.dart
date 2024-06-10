@@ -14,6 +14,7 @@ class ExpenseCardTile extends StatelessWidget {
               itemCount: expenseList.length, //number of items in the list
               itemBuilder: (context, index) {
                 return Card(
+                  color: Colors.brown[50],
                   child: ListTile(
                     title: Text(
                       expenseList[index].title,
@@ -31,21 +32,21 @@ class ExpenseCardTile extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          expenseList[index].date.toString().substring(0, 10),
+                          expenseList[index].getFormattedDate,
                           style: const TextStyle(color: Colors.black87),
                         ),
                       ],
                     ),
                     // ThreeLine: true,
                     selected: true,
-                    leading: const Icon(
-                      Icons.today_rounded,
+                    leading:  Icon(
+                      categoryIcons[expenseList[index].category],
                       color: Colors.brown,
                       size: 35,
                     ),
                     onTap: () {},
                     trailing: Text(
-                      '\$${expenseList[index].amount}',
+                     '\$${expenseList[index].amount.toStringAsFixed(2)}',
                       style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

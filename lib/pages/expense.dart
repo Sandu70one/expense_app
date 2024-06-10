@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/expense.dart';
+import 'package:flutter_application_1/widgets/add_new_expense_modal.dart';
 import 'package:flutter_application_1/widgets/expense_card_tile.dart';
 
 class Expenses extends StatefulWidget {
@@ -38,12 +39,21 @@ class _ExpensesState extends State<Expenses> {
         category: Category.work),
   ];
 
+//function to open a the modal sheet
+  void _openExpenseModal() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return AddNewExpenseModal();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Expenses ',
+          'Expenses  ',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -51,14 +61,14 @@ class _ExpensesState extends State<Expenses> {
         backgroundColor: Colors.brown[400],
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_rounded),
           color: Colors.white,
         ),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
             child: IconButton(
-              onPressed: () {},
+              onPressed: _openExpenseModal,
               icon: const Icon(Icons.add),
               color: Colors.white,
             ),
@@ -67,8 +77,9 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-         ExpenseCardTile(expenseList: _expenseList,),
-         
+          ExpenseCardTile(
+            expenseList: _expenseList,
+          ),
         ],
       ),
     );
